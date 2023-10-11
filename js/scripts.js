@@ -1,27 +1,36 @@
-// ... previous JS code ...
+// Feature list and tooltip display
+const features = [
+    { name: "Biometric Authentication", stats: "Secure and fast!" },
+    { name: "QR Code for Quick Access", stats: "Scanned by 90% travelers!" },
+    { name: "Offline Mode", stats: "Accessible anywhere!" },
+    { name: "Emergency Contacts", stats: "Safety first!" }
+];
 
-// Animate the profile picture
-anime({
-    targets: '#profileImage',
-    translateY: [-100, 0],
-    opacity: [0, 1],
-    duration: 800,
-    easing: 'easeOutExpo',
+const featureList = document.getElementById('featureList');
+
+features.forEach(feature => {
+    const li = document.createElement('li');
+    li.textContent = feature.name;
+    li.addEventListener('click', () => {
+        alert(feature.stats); // Displaying stats in a simple alert for now
+    });
+    featureList.appendChild(li);
 });
 
-// Animate the features list
-anime({
-    targets: '#featureList li',
-    translateY: [-20, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(100, {from: 'first'}),
-    easing: 'easeOutExpo',
-});
+function setBackground() {
+    const hour = new Date().getHours();
+    let bgColor;
 
-// Animate the whole container's fade-in
-anime({
-    targets: '.animate-fade-in',
-    opacity: [0, 1],
-    duration: 500,
-    easing: 'linear',
-});
+    if (hour >= 6 && hour < 12) {
+        bgColor = '#FFEBB7'; // Morning - Light Yellow
+    } else if (hour >= 12 && hour < 18) {
+        bgColor = '#87CEFA'; // Afternoon - Sky Blue
+    } else {
+        bgColor = '#1A237E'; // Evening - Deep Blue
+    }
+
+    document.body.style.backgroundColor = bgColor;
+}
+
+// Call the function to set the background when the script loads
+setBackground();
